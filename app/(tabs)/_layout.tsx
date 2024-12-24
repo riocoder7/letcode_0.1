@@ -13,6 +13,9 @@ export default function TabLayout() {
         },
         tabBarActiveTintColor: theme === 'dark' ? '#ffffff' : '#000000', // Active icon color
         tabBarInactiveTintColor: theme === 'dark' ? '#888888' : '#aaaaaa', // Inactive icon color
+        tabBarIconStyle: {
+           // Add padding around icons
+        },
       }}
     >
       <Tabs.Screen
@@ -21,17 +24,17 @@ export default function TabLayout() {
           title: 'Home',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="home-filled" size={size} color={color} /> // Modern home icon
+            <MaterialIcons name="home-filled" size={size * 1.2} color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="about"
         options={{
-          title: 'About',
+          title: 'Search',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="information-circle" size={size} color={color} /> // Modern info icon
+            <Ionicons name="search" size={size * 1.2} color={color} />
           ),
         }}
       />
@@ -41,7 +44,7 @@ export default function TabLayout() {
           title: 'Settings',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="cogs" size={size} color={color} /> // Cogs icon remains the same
+            <FontAwesome name="cogs" size={size * 1.2} color={color} />
           ),
         }}
       />
@@ -51,7 +54,17 @@ export default function TabLayout() {
           title: 'Profile',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="user" size={size} color={color} /> // User icon remains the same
+            <FontAwesome name="user" size={size * 1.2} color={color} />
+          ),
+        }}
+      />
+       <Tabs.Screen
+        name="ai"
+        options={{
+          title: 'AI',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="user" size={size * 1.2} color={color} />
           ),
         }}
       />
