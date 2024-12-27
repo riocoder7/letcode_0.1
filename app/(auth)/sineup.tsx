@@ -10,6 +10,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome'; // FontAwesome for icons
 import { useColorScheme } from 'react-native';  // Import useColorScheme to detect theme
 import { useRouter } from 'expo-router';
+import { resetAndNavigate } from '@/constants/router_push';
 
 const Signup = () => {
   const router = useRouter();
@@ -59,7 +60,8 @@ const Signup = () => {
     setErrors(newErrors);
 
     if (isValid) {
-      Alert.alert('Success', 'Sign-Up Successful!');
+      resetAndNavigate('/(tabs)/home');
+      
     }
   };
 

@@ -1,17 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'expo-router';
+import {resetAndNavigate} from "@/constants/router_push"
 import { useColorScheme } from 'react-native';  // Import useColorScheme to detect theme
 import { Colors } from '@/constants/Colors'; // Import the Colors object for theme colors
 
 const Index = () => {
-  const router = useRouter();
+  
   const [nav, setNav] = useState(false);
 
   useEffect(() => {
     const setTime = setTimeout(() => {
       setNav(true);
-      router.push('/getStart');
+      resetAndNavigate('/getStart') // Replace '/newPath' with the actual path you want to navigate to
     }, 2000);
 
     return () => clearTimeout(setTime);

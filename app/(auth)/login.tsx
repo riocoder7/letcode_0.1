@@ -1,5 +1,6 @@
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
+import {resetAndNavigate} from "@/constants/router_push"
 import {
   StyleSheet,
   Text,
@@ -49,7 +50,7 @@ const Login = () => {
     setErrors(newErrors);
 
     if (isValid) {
-      router.push("/(tabs)/home");
+      resetAndNavigate('/(tabs)/home')
     }
   };
 

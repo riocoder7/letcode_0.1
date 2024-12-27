@@ -1,7 +1,14 @@
+
+import Courses from '@/components/course';
+import Popular_course from '@/components/popular_course';
+import { resetAndNavigate } from '@/constants/router_push';
+import { BaseRouter } from '@react-navigation/native';
+import { router } from 'expo-router';
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, useColorScheme, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 const Home = () => {
   const theme = useColorScheme(); // Detect light or dark mode
@@ -11,11 +18,11 @@ const Home = () => {
     header: {
       width: '100%',
       height: 60,
-      backgroundColor: isDarkMode ? '#121212' : '#f8f9fa', // Dark or Light background
+      backgroundColor: isDarkMode ? '#000000' : '#f8f9fa', // Dark or Light background
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingHorizontal: 20,
+      // paddingHorizontal: 20,
       // Shadow for Android
       elevation: 4,
       // Shadow for iOS
@@ -23,6 +30,7 @@ const Home = () => {
       shadowOffset: { width: 0, height: 2 }, // Shadow offset (horizontal, vertical)
       shadowOpacity: 0.2, // Opacity of the shadow
       shadowRadius: 4, // Blur radius
+      
     },
     
     profileSection: {
@@ -50,61 +58,64 @@ const Home = () => {
     iconSection: {
       flexDirection: 'row',
       alignItems: 'center',
+     
+      
     },
     iconContainer: {
-      marginLeft: 15,
+      marginLeft: 10,
       position: 'relative',
+      backgroundColor:"#333333",
+      borderRadius:"50%",
+      width:50,
+      height:50,
+      justifyContent:"center",
+      alignItems:"center"
     },
     notificationBadge: {
       position: 'absolute',
-      top: -5,
-      right: -5,
+      top: 4,
+      right: 5,
       width: 8,
       height: 8,
       backgroundColor: 'red',
       borderRadius: 4,
     },
-    banner:{
-      width:"100%",
-      height:170,
-      backgroundColor: isDarkMode ? '#121212' : '#f8f9fa',
+    horizontal_scroll:{
       flexDirection:"row",
-      // justifyContent:"center",
-      alignContent:"center",
+      paddingBottom:5,
+     gap:5,
+     paddingTop:10
 
+    },
+    text_color:{
+      color:"white"
+    },
+    // popular_course:{
+    //   width:"100%",
+    //   height:200,
+    //   // backgroundColor:"red",
+    //   paddingTop:10,
+    //   flexDirection:"row",
+    //   gap:5
 
-    },
-    scrollView: {
-      paddingVertical: 5, 
-      paddingHorizontal:10
-    },
-    bannerItems: {
-      width: 280, // Width of each banner item
-      height: "100%", // Height of each banner item
-      backgroundColor: '#f0f0f0',  // Placeholder background color
-      marginRight: 10, // Space between items
-      borderRadius: 12, // Rounded corners
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderColor:"red"
-    },
-    bannerImg: {
-      width: "100%",
-      height: "100%",
-      borderWidth: 0.2,
-      borderColor: isDarkMode ? "#ffffff" : "#2D2D2D", // Dynamic border color
-      borderRadius: 12,
-      overflow: 'hidden',
-    },
+    // },
+    // popular_course_parts:{
+    //   width:"50%",
+    //   height:"100%",
+    //   backgroundColor:"green",
+    //   borderRadius:20
+      
+    // }
   });
 
   return (
     <>
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor:"#000000", paddingHorizontal:10}}>
       <View style={styles.header}>
         {/* User Profile Section */}
+        <TouchableOpacity onPress={()=>router.push('/(tabs)/profile')}>
         <View style={styles.profileSection}>
-          <Image
+          <Image 
             source={{
               uri: 'https://images.pexels.com/photos/35537/child-children-girl-happy.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
             }}
@@ -115,38 +126,105 @@ const Home = () => {
             <Text style={styles.userSubtitle}>Student</Text>
           </View>
         </View>
-
+</TouchableOpacity>
         {/* Icons Section */}
         <View style={styles.iconSection}>
-          {/* Search Icon */}
-          <TouchableOpacity style={styles.iconContainer}>
-            <Icon name="search" size={25} color={isDarkMode ? '#ffffff' : '#000000'} /> {/* Icon Color */}
-          </TouchableOpacity>
 
-          {/* Notification Icon */}
-          <TouchableOpacity style={styles.iconContainer}>
-            <Icon name="bell" size={25} color={isDarkMode ? '#ffffff' : '#000000'} /> {/* Icon Color */}
+          
+           {/* Notification Icon */}
+           <TouchableOpacity style={styles.iconContainer} onPress={()=>router.push('/Notification')}>
+           <Image style={{ tintColor:"white", width:20, height:20}} source={require('@/assets/icons/notification.png')} />
             <View style={styles.notificationBadge}></View> {/* Notification Badge */}
           </TouchableOpacity>
+
+          {/* Search Icon */}
+          <TouchableOpacity style={styles.iconContainer} onPress={()=>resetAndNavigate('/(tabs)/search')}>
+            <Image style={{ tintColor:"white", width:20, height:20 }} source={require('@/assets/icons/search.png')} />
+          </TouchableOpacity>
+
+         
         </View>
       </View>
-      <ScrollView>
-        <View style={styles.banner}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollView}>
-  <View style={styles.bannerItems}>
-    <Image style={styles.bannerImg} source={{uri:"https://images.pexels.com/photos/276452/pexels-photo-276452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}}  resizeMode="cover"/>
-  </View>
-  <View style={styles.bannerItems}>
-  <Image style={styles.bannerImg} source={{uri:"https://images.pexels.com/photos/276452/pexels-photo-276452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}}  resizeMode="cover"/>
-  </View>
-  <View style={styles.bannerItems}>
-  <Image style={styles.bannerImg} source={{uri:"https://images.pexels.com/photos/276452/pexels-photo-276452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}}  resizeMode="cover"/>
-  </View>
-</ScrollView>
+
+      <ScrollView horizontal={true}>
+      <View style={styles.horizontal_scroll}> 
+        
+          <TouchableOpacity >  
+            <View  style={{borderRadius:50, borderWidth:1, borderColor:"white"  , width:60, height:60, alignItems:"center", justifyContent:"center"}}> 
+              <Text style={[styles.text_color, {fontWeight:"900"}  ]}> ALL </Text>
+             </View> 
+          </TouchableOpacity>
+
+          <TouchableOpacity > 
+             <View  style={{borderRadius:50, borderWidth:1, borderColor:"white"   , width:120, height:60, alignItems:"center", justifyContent:"center"}}> 
+              <Text style={[styles.text_color, {fontWeight:"900"}  ]}>Web Desing </Text>
+               </View> 
+          </TouchableOpacity>
 
 
-        </View>
+          <TouchableOpacity >  
+            <View  style={{borderRadius:50,borderWidth:1, borderColor:"white"   , width:100, height:60, alignItems:"center", justifyContent:"center"}}> 
+              <Text style={[styles.text_color, {fontWeight:"900"}  ]}>Desing </Text> 
+            </View> 
+          </TouchableOpacity>
 
+          <TouchableOpacity >  
+            <View  style={{borderRadius:50,borderWidth:1, borderColor:"white"   , width:150, height:60, alignItems:"center", justifyContent:"center"}}> 
+              <Text style={[styles.text_color, {fontWeight:"900"}  ]}> App Developing </Text> 
+            </View> 
+          </TouchableOpacity>
+
+
+          <TouchableOpacity >  
+            <View  style={{borderRadius:50, borderWidth:1, borderColor:"white"   , width:120, height:60, alignItems:"center", justifyContent:"center"}}> 
+              <Text style={[styles.text_color, {fontWeight:"900"}  ]}>Git & Github </Text>
+             </View> 
+          </TouchableOpacity>
+
+          <TouchableOpacity > 
+             <View  style={{borderRadius:50, borderWidth:1, borderColor:"white"  , width:120, height:60, alignItems:"center", justifyContent:"center"}}> 
+              <Text style={[styles.text_color, {fontWeight:"900"}  ]}>Python</Text>
+               </View> 
+          </TouchableOpacity>
+
+
+          <TouchableOpacity >  
+            <View  style={{borderRadius:50, backgroundColor:"#333333" , width:100, height:60, alignItems:"center", justifyContent:"center"}}> 
+              <Text style={[styles.text_color, {fontWeight:"900"}  ]}>Java </Text> 
+            </View> 
+          </TouchableOpacity>
+
+          <TouchableOpacity >  
+            <View  style={{borderRadius:50, backgroundColor:"#333333" , width:120, height:60, alignItems:"center", justifyContent:"center"}}> 
+              <Text style={[styles.text_color, {fontWeight:"900"}  ]}> C & C++ </Text> 
+            </View> 
+          </TouchableOpacity>
+
+        
+          
+      </View>
+      </ScrollView>
+
+      
+       
+      <ScrollView > 
+
+      <ScrollView horizontal={true}> 
+      <Popular_course startColor="#AD9AF4" EndColor="#CDC0FD" textValue={"Web Developments & Desing  "} />
+      <Popular_course startColor="#FFCFCF" EndColor="#FEDADA" textValue={"App Developments & Desing  "}  />
+      <Popular_course startColor="#AD9AF4" EndColor="#CDC0FD" textValue={"Web Developments Advance  "} />
+      <Popular_course startColor="#FFCFCF" EndColor="#FEDADA" textValue={"App Developments Advance  "}  />
+      </ScrollView>
+      <Courses startColor='#C4C98B' EndColor='#CACAA6'  textValue={"Machine Larning Progamming"}/>
+      <Courses startColor='#CDE1FE' EndColor='#EEEEDC'  textValue={"Marn Stack Progamming"}/>
+      <Courses startColor='#C4C98B' EndColor='#CACAA6' textValue={"python Progamming"} />
+      <Courses startColor='#CDE1FE' EndColor='#EEEEDC' textValue={"Dev Opps Progamming"} />
+      
+
+      
+
+
+      
         
       </ScrollView>
       </SafeAreaView>

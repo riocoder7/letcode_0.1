@@ -1,17 +1,18 @@
 import { Image, StyleSheet, Text, View, useColorScheme } from 'react-native';
 import React from 'react';
 import { useRouter } from 'expo-router';
+import {resetAndNavigate} from "@/constants/router_push"
 
 const GetStart = () => {
   const router = useRouter();
   const theme = useColorScheme(); // Get the current theme (light or dark)
 
   const login = () => {
-    router.push("/login");
+    resetAndNavigate('/(auth)/login')
   };
 
   const signUp = () => {
-    router.push("/sineup");
+   resetAndNavigate('/(auth)/sineup')
   };
 
   return (
