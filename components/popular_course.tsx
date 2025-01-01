@@ -1,39 +1,56 @@
 import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, FlatList } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-interface PopularCourseProps {
-  startColor: string;
-  EndColor: string;
-  textValue: string; // Array of text values
+// interface PopularCourseProps {
+//   startColor: string;
+//   EndColor: string;
+//   textValue: string; // Array of text values
+// }
+
+
+
+
+
+interface Course {
+  id: number;
+  name: string;
+  startColor:string;
+  endColor:string;
+  description:string
 }
 
-const Popular_course: React.FC<PopularCourseProps> = ({ startColor, EndColor, textValue }) => {
+const Popular_course = ({ data }: { data: Course[] }) => {
   return (
-    <View style={styles.popular_course}>
-     
-        <View style={styles.popular_course_parts}>
-          <LinearGradient colors={[startColor, EndColor]} style={styles.gradient}>
-            <View style={styles.textContainer}>
-              <Text style={styles.text} >
-                {textValue}
+    <FlatList
+      data={data}
+      keyExtractor={(item) => item.id.toString()}
+      horizontal
+      renderItem={({ item }) => (
+        <View style={styles.popular_course}>
+          <View style={styles.popular_course_parts}>
+            <LinearGradient colors={[item.startColor, item.endColor]} style={styles.gradient}>
+            <View style={[styles.textContainer]} >
+              
+              <Text style={styles.text}>
+                {item.name}
               </Text>
+                <Text style={{ marginTop: 20, fontFamily:"arial" }}>{item.description}</Text>
             </View>
 
             <View style={styles.btn_arrow}>
-
               <View style={styles.freeBtn}>
-                <Text style={{fontWeight:"500"}}>Free</Text>
+                <Text style={{ fontWeight: "500" }}>Free</Text>
               </View>
-               <View style={styles.arrowView}>
-                                <Image source={require('@/assets/icons/arrow.png')} style={{ width: 20, height: 20 }} />
-                              </View>
+              <View style={styles.arrowView}>
+                <Image source={require('@/assets/icons/arrow.png')} style={{ width: 20, height: 20 }} />
+              </View>
             </View>
-                    
-          </LinearGradient>
+            </LinearGradient>
+          </View>
         </View>
-     
-    </View>
+      )}
+    />
   );
 };
 
@@ -61,7 +78,7 @@ const styles = StyleSheet.create({
   textContainer: {
     paddingHorizontal: 8,
     paddingTop: 25,
-    
+    overflow:"hidden",
     height:"70%",
     
   },

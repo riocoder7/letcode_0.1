@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '@/config/firebase.config';
 import {
   StyleSheet,
   Text,
@@ -24,6 +26,18 @@ const Signup = () => {
     email: '',
     password: '',
   });
+
+  interface Errors {
+    name: string;
+    email: string;
+    password: string;
+  }
+
+  interface User {
+    uid: string;
+  }
+
+
 
   // Get current theme (light or dark)
   const theme = useColorScheme();
@@ -58,16 +72,34 @@ const Signup = () => {
     }
 
     setErrors(newErrors);
-
-    if (isValid) {
-      resetAndNavigate('/(tabs)/home');
+   
+       if (isValid) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(async(userCredential) => {
+          const  user  = userCredential.user;
+          if (user) {
+            const uid: string = user.uid;
+            console.log(user)
+            Alert.alert("user successfully sineup")
+            resetAndNavigate('/(tabs)/home');
+          }
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ...
+        });
+     
       
-    }
+  
   };
+    }
+   
 
   return (
     <View style={[styles.container, { backgroundColor: theme === 'dark' ? '#121212' : '#fff' }]}>
-      <Text style={[styles.title, { color: theme === 'dark' ? '#fff' : '#333' }]}>Sign up</Text>
+      <Text style={[styles.title, { color: theme === 'dark' ? '#fff' : '#333' }]} >Sign up</Text>
 
       {/* Name Input */}
       <View style={[styles.inputWrapper, { borderColor: theme === 'dark' ? '#444' : '#ccc' }]}>

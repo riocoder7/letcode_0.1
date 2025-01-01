@@ -1,24 +1,66 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity, Alert } from 'react-native'
+import React, { useState } from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
-interface PopularCourseProps {
-  startColor: string;
-  EndColor: string;
-  textValue:string;
-  
+
+
+interface Course {
+  id: number;
+  name: string;
+  startColor:string;
+  endColor:string;
+  description:string
 }
-const Courses : React.FC<PopularCourseProps> = ({ startColor, EndColor , textValue }) => {
+const Courses  = ({ data }: { data: Course[] }) => {
+  // const [fomedata, setfomedata]= useState({});
+  // const onHandleInputData=(field: string, value: string) => {
+  //   setfomedata((prev) => ({
+  //     ...prev,
+  //     [field]: value
+  //   }))
+  //   Alert.alert(JSON.stringify(fomedata))
+  // }
+  const courseData =[ {
+    index:1,
+    name:"Machine larning programmiong",
+    startColor:"#C4C98B",
+    EndColor:"#CACAA6",
+    
+  },
+{
+  name:"Marn Stack Progamming",
+  startColor:"#CDE1FE",
+  EndColor:"#EEEEDC",
+
+},
+{
+  name:"python Progamming",
+  startColor:"#CFFFDC",
+  EndColor:"#EEEEDC",
+
+}
+]
   return (
-    <View style={styles.course}>
+    
+     <FlatList 
+       data={data}
+       renderItem={({item, index})=>(
+
+       
+    <TouchableOpacity 
+    // onPress={() => onHandleInputData('type', item.name)}
+     style={styles.course}>
+      
+   
+
       <LinearGradient
-        colors={[startColor, EndColor]} // Adjust colors as needed
-        // start={{ y: 0, x: 0 }}
-        // end={{ x: 1, y: 1 }}
+        colors={[item.startColor, item.endColor]} // Adjust colors as needed
+     
         style={styles.innerView}
       >
         <View style={{width:"100%" , height:"100%"  , padding:20}}> 
         <View style={styles.text}> 
-        <Text style={{fontSize:30, fontWeight:"900", paddingHorizontal:0}}>{textValue}</Text>
+        <Text 
+          style={{fontSize:30, fontWeight:"900", paddingHorizontal:0}} >{item.name}</Text>
         </View>
         <View style={styles.btn}>
 
@@ -31,7 +73,9 @@ const Courses : React.FC<PopularCourseProps> = ({ startColor, EndColor , textVal
         </View>
         </View>
       </LinearGradient>
-    </View>
+    </TouchableOpacity>
+   )} />
+    
   )
 }
 
@@ -54,7 +98,7 @@ const styles = StyleSheet.create({
     },
     text:{
       width:"100%",
-      height:"50%",
+      height:"60%",
       // backgroundColor:"green",
 
     },
