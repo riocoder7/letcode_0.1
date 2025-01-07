@@ -46,7 +46,7 @@ const Courses  = ({ data }: { data: Course[] }) => {
        renderItem={({item, index})=>(
 
        
-    <TouchableOpacity 
+    <TouchableOpacity onPress={()=>Alert.alert(item.name)} 
     // onPress={() => onHandleInputData('type', item.name)}
      style={styles.course}>
       
