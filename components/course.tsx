@@ -6,11 +6,13 @@ import { LinearGradient } from 'expo-linear-gradient';
 interface Course {
   id: number;
   name: string;
-  startColor:string;
-  endColor:string;
-  description:string
+  startColor: string;
+  endColor: string;
+  description: string;
+
 }
-const Courses  = ({ data }: { data: Course[] }) => {
+
+const Courses  = ({ data, modulizer, setCourse }: { data: Course[], modulizer: () => void, setCourse: React.Dispatch<React.SetStateAction<string>> }) => {
   // const [fomedata, setfomedata]= useState({});
   // const onHandleInputData=(field: string, value: string) => {
   //   setfomedata((prev) => ({
@@ -40,13 +42,18 @@ const Courses  = ({ data }: { data: Course[] }) => {
 }
 ]
   return (
-    
+    <> 
      <FlatList 
        data={data}
        renderItem={({item, index})=>(
 
        
-    <TouchableOpacity onPress={()=>Alert.alert(item.name)} 
+    <TouchableOpacity  onPress={()=>{
+      return(
+        modulizer(),
+        setCourse(item.name)
+      )
+    }} 
     // onPress={() => onHandleInputData('type', item.name)}
      style={styles.course}>
       
@@ -74,7 +81,11 @@ const Courses  = ({ data }: { data: Course[] }) => {
         </View>
       </LinearGradient>
     </TouchableOpacity>
+
+     
    )} />
+   
+    </>
     
   )
 }

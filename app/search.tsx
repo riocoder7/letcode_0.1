@@ -1,13 +1,19 @@
 import React, { useRef, useState } from 'react';
-import { View, TextInput, TouchableOpacity, StyleSheet, Text, FlatList } from 'react-native';
+import { View, TextInput, TouchableOpacity, StyleSheet, Text, FlatList, Alert } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Modalize } from 'react-native-modalize';
+import SearchCom from '@/components/search';
 
 const SearchPage = () => {
   const modalizeRefFilter = useRef<Modalize>(null);
 
   const [searchInput, setsearchInput] = useState('');
+  const [Beginners, setBeginners] = useState(false);
+  const [Advance, setAdvance] = useState(false);
+  const [Intermediate, setIntermediate] = useState(false);
+  
+
   
   // Example course data
   const courseData = [
@@ -51,6 +57,7 @@ const SearchPage = () => {
             placeholderTextColor="#aaa"
             value={searchInput}
             onChangeText={setsearchInput}
+            autoFocus={false}
           />
           {/* Divider between input and filter icon */}
           <Text style={styles.divider}>|</Text>
@@ -63,7 +70,9 @@ const SearchPage = () => {
 
         {/* Background view */}
         <View style={styles.backgroundView}>
-          <Text style={styles.backgroundText}>Background content behind courses</Text>
+          <SearchCom/>
+
+          {/* <Text style={styles.backgroundText}>Background content behind courses</Text> */}
         </View>
 
         {/* Absolutely Positioned Courses Display */}
@@ -72,9 +81,12 @@ const SearchPage = () => {
             data={filteredCourses}
             keyExtractor={(item) => item.name}
             renderItem={({ item }) => (
-              <View style={styles.courseItem}>
+              <TouchableOpacity onPress={()=>Alert.alert(item.name)} style={styles.courseItem}>
+                <View style={{width:'100%', height:150, backgroundColor:"green", borderRadius:8}}>
                 <Text style={styles.courseText}>{item.name}</Text>
-              </View>
+                </View>
+                
+              </TouchableOpacity>
             )}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.courseListContainer}
@@ -91,12 +103,22 @@ const SearchPage = () => {
         {/* Bottom Sheet filter */}
         <Modalize ref={modalizeRefFilter} snapPoint={300} modalHeight={700} handlePosition="inside">
           <View style={styles.bottomSheetContent}>
-            <Text style={styles.bottomSheetTitle}>Filter Options</Text>
-            <Text>Option 1</Text>
-            <Text>Option 2</Text>
-            <Text>Option 3</Text>
-            <Text>Beginner</Text>
-            <Text>Advanced</Text>
+            <View style={styles.bottomSheet_sub_Content}> 
+            <View>  <Text style={{fontSize:25}}>Beginners </Text> </View>
+              <TouchableOpacity  onPress={()=>setBeginners(!Beginners)} style={[{width:50, height:'80%',borderRadius:8 ,  borderWidth:2}, Beginners === true ?{backgroundColor:"red"}:{backgroundColor:"yellow"}]}> </TouchableOpacity>
+              </View>
+
+             <View style={styles.bottomSheet_sub_Content}> 
+              <Text style={{fontSize:25}}>Intermediate </Text> 
+              <TouchableOpacity onPress={()=>setIntermediate(!Intermediate)} style={[{width:50, height:'80%',borderRadius:8 ,  borderWidth:2}, Intermediate === true ?{backgroundColor:"red"}:{backgroundColor:"yellow"}]}> </TouchableOpacity>
+              </View>
+
+               <View style={styles.bottomSheet_sub_Content}> 
+              <Text style={{fontSize:25}}>Advance </Text> 
+              <TouchableOpacity onPress={()=>setAdvance(!Advance)} style={[{width:50, height:'80%',borderRadius:8 ,  borderWidth:2, }, Advance === true ?{}:{backgroundColor:"yellow"} ]}> 
+                <Text style={{ fontSize: 25 }}>✅</Text>
+              </TouchableOpacity>
+              </View>
           </View>
         </Modalize>
       </View>
@@ -123,7 +145,10 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
     width: '100%', // Increase width to 100%
-    height: 50, // Increase height to 50
+    height: 50, 
+    borderWidth:2,
+    borderColor:"gray"
+    
   },
   searchIcon: {
     marginRight: 4,
@@ -144,11 +169,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   backgroundView: {
-    width: 300,
+    width: '100%',
     height: 500,
-    backgroundColor: 'red',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex:1,
+    // backgroundColor: 'red',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     position: 'relative',
     top:20 // Makes sure other content stays below
   },
@@ -158,12 +184,16 @@ const styles = StyleSheet.create({
   },
   courseListContainer: {
     marginTop: 20,
+    
   },
   courseItem: {
     backgroundColor: '#1e1e1e',
-    padding: 16,
+    padding: 5,
     marginBottom: 12,
     borderRadius: 8,
+    borderWidth:2,
+    borderColor:"gray",
+    overflow:"hidden"
   },
   courseText: {
     color: '#fff',
@@ -202,6 +232,17 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 10,
   },
+  bottomSheet_sub_Content:{
+    width:'100%',
+    height:50,
+    borderRadius:8, 
+    borderWidth:2,
+    marginTop:30, 
+    paddingHorizontal:10,
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center"    
+  }
 });
 
 export default SearchPage;

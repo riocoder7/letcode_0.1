@@ -1,16 +1,8 @@
-import React from 'react';
-import { Text, View, StyleSheet, Image, FlatList } from 'react-native';
+import React, { useRef } from 'react';
+import { Text, View, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-
-// interface PopularCourseProps {
-//   startColor: string;
-//   EndColor: string;
-//   textValue: string; // Array of text values
-// }
-
-
-
-
+import { Modalize } from 'react-native-modalize';
+import CourseEnrollment from './courseEnrollment';
 
 interface Course {
   id: number;
@@ -20,14 +12,22 @@ interface Course {
   description:string
 }
 
-const Popular_course = ({ data }: { data: Course[] }) => {
+const Popular_course = ({ data, modulizer, setCourse }: { data: Course[], modulizer: () => void, setCourse: React.Dispatch<React.SetStateAction<string>> }) => {
+  
+  
   return (
+    <>
     <FlatList
       data={data}
       keyExtractor={(item) => item.id.toString()}
       horizontal
       renderItem={({ item }) => (
-        <View style={styles.popular_course}>
+        <TouchableOpacity style={styles.popular_course} onPress={()=>{
+          return(
+            modulizer(),
+            setCourse(item.name)
+          )
+        }}  >
           <View style={styles.popular_course_parts}>
             <LinearGradient colors={[item.startColor, item.endColor]} style={styles.gradient}>
             <View style={[styles.textContainer]} >
@@ -48,9 +48,11 @@ const Popular_course = ({ data }: { data: Course[] }) => {
             </View>
             </LinearGradient>
           </View>
-        </View>
+        </TouchableOpacity>
       )}
     />
+ 
+    </>
   );
 };
 

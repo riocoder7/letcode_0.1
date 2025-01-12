@@ -41,21 +41,7 @@ const SandboxExample = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        style={styles.textInput}
-        multiline
-        value={code}
-        onChangeText={setCode}
-        placeholder="Write JavaScript code here..."
-      />
-      <Button title="Run Code" onPress={handleRunCode} />
-      <Text style={styles.outputLabel}>Output:</Text>
-      <Text style={styles.output}>{output}</Text>
-      <WebView
-        ref={(ref) => (webviewRef = ref)}
-        onMessage={(event) => setOutput(event.nativeEvent.data)}
-        style={{ display: "none" }}
-      />
+      <WebView source={{uri:'https://chatgpt.com/'}}  />
     </View>
   );
 };

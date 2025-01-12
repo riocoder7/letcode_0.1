@@ -31,18 +31,7 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="search"
-        options={{
-          headerShown: false,
-          tabBarIcon: () => (
-            <Image
-              source={require('@/assets/icons/search.png')}
-              style={[styles.icon, { tintColor }]}
-            />
-          ),
-        }}
-      />
+      
       <Tabs.Screen
         name="settings"
         options={{
