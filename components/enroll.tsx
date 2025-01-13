@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, Image } from 'react-native';
 
 // Define the Course type
 interface Course {
@@ -10,63 +10,113 @@ interface Course {
 }
 
 // CourseCard component that accepts `enrollment` prop
-const Enroll = ({ enrollment, }: { enrollment: Course,  }) => {
+const Enroll = ({ enrollment, }: { enrollment: Course, }) => {
     return (
-        <View style={styles.card}>
-            {/* Course Details */}
-            <View style={styles.courseDetails}>
-                <Text style={styles.title}>{enrollment.title}</Text>
-                <Text style={styles.instructor}>Instructor: {enrollment.instructor}</Text>
-                <Text style={styles.description}>{enrollment.description}</Text>
+        <View style={styles.container}>
+            <Text style={styles.courseName} >{enrollment.title} </Text>
+            <View style={styles.imageSection}>
+            <Image
+                source={require('@/assets/images/javascript.png')}
+                style={{ width: '100%', height: '100%', borderRadius: 12 }}
+            />
             </View>
 
-            {/* Enroll Button at the bottom */}
-            <View style={styles.enrollButtonContainer}>
-                <Button title="Enroll" />
+            <View style={{ flexDirection: "row", width: '100%', height: 100, alignItems: "center", }}>
+                <View style={styles.lessions}>
+
+                    <View style={styles.icon}>
+
+
+                        <Image
+                            source={require('@/assets/icons/icons8-book-50.png')}
+                            style={{ width: 30, height: 30, borderRadius: 24 }}
+
+                        />
+                    </View>
+                    <View style={styles.textPart}>
+                        <Text style={{ color: "#fff" }}> hellow </Text>
+                    </View>
+
+                </View>
+                <View style={[styles.lessions, { marginLeft: 5 }]}>
+                    <View style={styles.icon}>
+
+
+                        <Image
+                            source={require('@/assets/icons/icons8-clock-50.png')}
+                            style={{ width: 30, height: 30, borderRadius: 24 }}
+
+                        />
+                    </View>
+                    <View style={styles.textPart}>
+                        <Text style={{ color: "#fff" }}> hellow </Text>
+                    </View>
+                </View>
+                <View style={[styles.share, { marginLeft: 5 }]}>
+                    <View>
+                        <Image
+                            source={require('@/assets/icons/icons8-share-50.png')}
+                            style={{ width: 30, height: 30, borderRadius: 24 }}
+                        />
+                    </View>
+                </View>
+
             </View>
+
         </View>
     );
 };
 
 // Styles
 const styles = StyleSheet.create({
-    card: {
+    container: {
+        flex: 1,
+
+    },
+    imageSection: {
         width: '100%',
-        borderRadius: 10,
+        height: 180,
+        marginTop: 20,
+        backgroundColor: "green",
+        borderRadius: 12,
+    },
+    courseName: {
+        marginTop: 30,
+        fontSize: 40,
+        color: "white",
+    },
+    lessions: {
+        width: '40%',
+        height: 50,
+        flexDirection: "row",
+        borderRadius: 30,
+        backgroundColor: "#080808"
+
+    },
+    share: {
+        width: 50,
+        height: 50,
+        borderRadius: 50,
+        backgroundColor: "#DAD9DC",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    icon: {
+        width: 48,
+        height: 49,
+        borderRadius: 50,
+        backgroundColor: "#1c1d20",
         borderWidth: 1,
-        borderColor: '#ddd',
-        marginVertical: 10,
-        backgroundColor: '#fff',
-        overflow: 'hidden', // Ensures content doesn't overflow the rounded corners
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.1,
-        shadowRadius: 10,
-        elevation: 5,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center"
     },
-    courseDetails: {
-        padding: 20,
-    },
-    title: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    instructor: {
-        fontSize: 14,
-        color: '#555',
-        marginBottom: 10,
-    },
-    description: {
-        fontSize: 14,
-        color: '#777',
-    },
-    enrollButtonContainer: {
-        padding: 10,
-        borderTopWidth: 1,
-        borderTopColor: '#ddd',
-        backgroundColor: '#f8f8f8',
-    },
+    textPart: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center"
+    }
 });
 
 export default Enroll;

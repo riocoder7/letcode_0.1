@@ -16,7 +16,7 @@ const Home = () => {
   const isDarkMode = theme === 'dark';
   const [selected, setSelected] = useState('all');
   const [selectedCourse, setSelectedCourse] = useState<string>();
- 
+
   const enr = [
     // Assuming Enrollments data structure looks like this
     { id: 1, title: 'Web Development', student: 'John Doe' },
@@ -25,7 +25,7 @@ const Home = () => {
   ];
 
   const onOpen = () => {
-    modalizeRefFilter.current?.open(); 
+    modalizeRefFilter.current?.open();
   };
   const data = [
     {
@@ -40,6 +40,7 @@ const Home = () => {
 
   const styles = StyleSheet.create({
     header: {
+      paddingHorizontal: 10,
       width: '100%',
       height: 60,
       backgroundColor: isDarkMode ? '#000000' : '#f8f9fa',
@@ -163,127 +164,129 @@ const Home = () => {
   //   };
 
   return (
-   <GestureHandlerRootView> 
-    <SafeAreaView style={{ backgroundColor: '#000000', paddingHorizontal: 10 , flex:1}}>
-      {/* main View  */}
-      <View style={{flex:1, }}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.push('/(tabs)/profile')}>
-          <View style={styles.profileSection}>
-            <Image
-              source={{
-                uri: 'https://images.pexels.com/photos/35537/child-children-girl-happy.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-              }}
-              style={styles.profileImage}
-            />
-            <View style={styles.userDetails}>
-              <Text style={styles.userName}>Alan Williams</Text>
-              <Text style={styles.userSubtitle}>Student</Text>
+    <GestureHandlerRootView>
+      <SafeAreaView style={{ backgroundColor: '#000000', flex: 1 }}>
+        {/* main View  */}
+        <View style={{ flex: 1, }}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => router.push('/(tabs)/profile')}>
+              <View style={styles.profileSection}>
+                <Image
+                  source={{
+                    uri: 'https://images.pexels.com/photos/35537/child-children-girl-happy.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                  }}
+                  style={styles.profileImage}
+                />
+                <View style={styles.userDetails}>
+                  <Text style={styles.userName}>Alan Williams</Text>
+                  <Text style={styles.userSubtitle}>Student</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+
+            <View style={styles.iconSection}>
+              {/* Notification Icon */}
+              <TouchableOpacity style={styles.iconContainer}
+              // onPress={() => router.push('/Notification')}
+              >
+                <Image style={{ tintColor: 'white', width: 20, height: 20 }} source={require('@/assets/icons/notification.png')} />
+                <View style={styles.notificationBadge} />
+              </TouchableOpacity>
+
+              {/* Search Icon */}
+              <TouchableOpacity style={styles.iconContainer} onPress={() => router.push('/search')}>
+                <Image style={{ tintColor: 'white', width: 20, height: 20 }} source={require('@/assets/icons/search.png')} />
+              </TouchableOpacity>
             </View>
           </View>
-        </TouchableOpacity>
 
-        <View style={styles.iconSection}>
-          {/* Notification Icon */}
-          <TouchableOpacity style={styles.iconContainer}  
-          // onPress={() => router.push('/Notification')}
-          >
-            <Image style={{ tintColor: 'white', width: 20, height: 20 }} source={require('@/assets/icons/notification.png')} />
-            <View style={styles.notificationBadge} />
-          </TouchableOpacity>
-
-          {/* Search Icon */}
-          <TouchableOpacity style={styles.iconContainer} onPress={() => router.push('/search')}>
-            <Image style={{ tintColor: 'white', width: 20, height: 20 }} source={require('@/assets/icons/search.png')} />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      {/* Category filter buttons */}
-      <View style={{  paddingTop:10, paddingBottom:10, marginHorizontal: 2, flexDirection: "row", gap: 10, }}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={['all', 'Development', 'Data', 'Programming', 'git', 'Framework', 'Cloud', 'other']}
-            keyExtractor={(item) => item}
-            renderItem={({ item }) => (
-              <TouchableOpacity style={{marginHorizontal:2}} onPress={() => setSelected(item)}>
-                <View
-                  style={[
-                    item === 'all' ? styles.randerBtnAll : styles.randerBtns,
-                    selected === item ? { backgroundColor: 'white' } : { backgroundColor: 'rgba(0,0,0,0)' },
-                  ]}
-                >
-                  <Text style={[styles.text_color, selected === item ? { color: 'black' } : { color: 'white' }]}>
-                    {item}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            )}
-          />
+          {/* Category filter buttons */}
+          <View style={{ paddingTop: 10, paddingHorizontal: 10, paddingBottom: 10, marginHorizontal: 2, flexDirection: "row", gap: 10, }}>
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={['all', 'Development', 'Data', 'Programming', 'git', 'Framework', 'Cloud', 'other']}
+              keyExtractor={(item) => item}
+              renderItem={({ item }) => (
+                <TouchableOpacity style={{ marginHorizontal: 2 }} onPress={() => setSelected(item)}>
+                  <View
+                    style={[
+                      item === 'all' ? styles.randerBtnAll : styles.randerBtns,
+                      selected === item ? { backgroundColor: 'white' } : { backgroundColor: 'rgba(0,0,0,0)' },
+                    ]}
+                  >
+                    <Text style={[styles.text_color, selected === item ? { color: 'black' } : { color: 'white' }]}>
+                      {item}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              )}
+            />
 
           </View>
 
-      {/* Combined FlatList for both Popular Courses and Regular Courses */}
-      <View style={{width:'100%', flex: 1}}>
-      <FlatList
-        data={data}
-        keyExtractor={(item, index) => index.toString()}  // Use index for section key
-        renderItem={({ item }) => {
-          if (item.type === 'popular') {
-           
-        return (
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={item.data}
-            keyExtractor={(course) => course.id.toString()}
-            renderItem={({ item }) => (
-         
-            <Popular_course key={item.id} data={[item]} modulizer={onOpen} setCourse={setSelectedCourse as Dispatch<SetStateAction<any>>} />
-          
-            )}
-          />
-        );
-          } else if (item.type === 'regular') {
-            
+          {/* Combined FlatList for both Popular Courses and Regular Courses */}
+          <View style={{ width: '100%', flex: 1, paddingHorizontal: 10 }}>
+            <FlatList
+              data={data}
+              keyExtractor={(item, index) => index.toString()}  // Use index for section key
+              renderItem={({ item }) => {
+                if (item.type === 'popular') {
 
-        return (
-          <FlatList
-            data={item.data}
-            keyExtractor={(course) => course.id.toString()}
-            renderItem={({ item }) => (
-            
-            <Courses key={item.id} data={[item]} modulizer={onOpen} setCourse={setSelectedCourse as Dispatch<SetStateAction<any>>} />
-         
-            )}
-          />
-        );
-          }
-          return null;
-        }}
-      />
-      </View>
-      
+                  return (
+                    <FlatList
+                      horizontal
+                      showsHorizontalScrollIndicator={false}
+                      data={item.data}
+                      keyExtractor={(course) => course.id.toString()}
+                      renderItem={({ item }) => (
 
-      <Modalize ref={modalizeRefFilter} snapPoint={500} modalHeight={700}>
-      <View style={{ padding: 20 }}>
-        <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 10 }}>
-          {selectedCourse}
-        </Text>
-        
+                        <Popular_course key={item.id} data={[item]} modulizer={onOpen} setCourse={setSelectedCourse as Dispatch<SetStateAction<any>>} />
 
-        <FlatList
-          data={Enrollments.filter((enrollment) => enrollment.title === selectedCourse)}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <Enroll key={item.id} enrollment={item} /> // Pass the item directly
-          )}
-        />
-      </View>
-    </Modalize>
-      </View>
-    </SafeAreaView>
+                      )}
+                    />
+                  );
+                } else if (item.type === 'regular') {
+
+
+                  return (
+                    <FlatList
+                      data={item.data}
+                      keyExtractor={(course) => course.id.toString()}
+                      renderItem={({ item }) => (
+
+                        <Courses key={item.id} data={[item]} modulizer={onOpen} setCourse={setSelectedCourse as Dispatch<SetStateAction<any>>} />
+
+                      )}
+                    />
+                  );
+                }
+                return null;
+              }}
+            />
+          </View>
+
+
+          <Modalize ref={modalizeRefFilter} snapPoint={500} modalHeight={700} handlePosition="inside" handleStyle={{ backgroundColor: '#8c8c8c' }} modalStyle={{ backgroundColor: "#1c1d20" }}>
+            <View style={{ padding: 20 }}>
+              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                <Text></Text>
+                <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>Course info</Text>
+                <TouchableOpacity onPress={() => modalizeRefFilter.current?.close()}>
+                  <Image style={{ tintColor: 'white', width: 30, height: 30 }} source={require('@/assets/icons/cross-icon.png')} />
+                </TouchableOpacity>
+              </View>
+              <FlatList
+                data={Enrollments.filter((enrollment) => enrollment.title === selectedCourse)}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <Enroll key={item.id} enrollment={item} /> // Pass the item directly
+                )}
+              />
+            </View>
+          </Modalize>
+        </View>
+      </SafeAreaView>
     </GestureHandlerRootView>
   );
 };
