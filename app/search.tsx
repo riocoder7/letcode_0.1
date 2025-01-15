@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { View, TextInput, TouchableOpacity, StyleSheet, Text, FlatList, Alert } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { View, TextInput, TouchableOpacity, StyleSheet, Text, FlatList, Alert, Image } from 'react-native';
+import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Modalize } from 'react-native-modalize';
 import SearchCom from '@/components/search';
@@ -17,16 +17,26 @@ const SearchPage = () => {
   
   // Example course data
   const courseData = [
-    { name: "Java" },
-    { name: "Python" },
-    { name: "JavaScript" },
-    { name: "C++" },
-    { name: "C#" },
-    { name: "Ruby" },
-    { name: "Go" },
-    { name: "Swift" },
-    { name: "Kotlin" },
-    { name: "PHP" },
+    { name: "Java", logo: require('@/assets/icons/java-icon.png') },
+    { name: "Python", logo: require('@/assets/icons/python-logo.png') },
+    { name: "JavaScript", logo: require('@/assets/icons/javascript.png') },
+    { name: "C++", logo: require('@/assets/icons/cpp.png') },
+    { name: "C#", logo: require('@/assets/icons/cshap.png') },
+    { name: "Ruby", logo: require('@/assets/icons/ruby.png') },
+    { name: "Go", logo: require('@/assets/icons/go.png') },
+    { name: "Swift", logo: require('@/assets/icons/swift.png') },
+    { name: "Kotlin", logo: require('@/assets/icons/kotlin.png') },
+    { name: "PHP", logo: require('@/assets/icons/php.png') },
+    { name: "TypeScript", logo: require('@/assets/icons/typescript.png') },
+    { name: "Rust", logo: require('@/assets/icons/rust.png') },
+    { name: "Dart", logo: require('@/assets/icons/dart.png') },
+  { name: "GitHub", logo: require('@/assets/icons/github.png') },
+  { name: "Git", logo: require('@/assets/icons/git.png') },
+  { name: "AWS", logo: require('@/assets/icons/aws.png') },
+  { name: "Kubernetes", logo: require('@/assets/icons/kubernetes.png') },
+  { name: "MongoDB", logo: require('@/assets/icons/mongodb.png') },
+  { name: "MySQL", logo: require('@/assets/icons/mysql.png') },
+  { name: "Firebase", logo: require('@/assets/icons/firebase.png') }
   ];
 
   // Filter courses based on the search input
@@ -78,15 +88,27 @@ const SearchPage = () => {
         {/* Absolutely Positioned Courses Display */}
         {searchInput !== '' && filteredCourses.length > 0 ? (
           <FlatList
+        
             data={filteredCourses}
-            keyExtractor={(item) => item.name}
+            keyExtractor={(item) => item!.name}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={()=>Alert.alert(item.name)} style={styles.courseItem}>
-                <View style={{width:'100%', height:150, backgroundColor:"green", borderRadius:8}}>
-                <Text style={styles.courseText}>{item.name}</Text>
+              <ScrollView>
+               <View style={styles.searchItem}>
+                <View style={{width: 50, height: 50, borderRadius: 25, overflow: 'hidden'}}>
+                  <Image source={item.logo} style={{width: '100%', height: '100%'}} resizeMode="cover" />
                 </View>
+                <View style={{width:'65%', height:"100%", }}>
+                <Text style={{fontSize:18, color:"#fff"}} >{item.name}</Text>
+                <Text style={{fontSize:12, color:"#666666"}} >{item.name} krfjkfjfkj kjdkjdj k kkjsksj </Text>
+                 </View>
+                <View style={{flexDirection:"row", justifyContent:"center",alignItems:"center", }}> 
+                <Text style={{fontSize:35, color:"#fff"}}> > </Text>
+                </View>
+               
+              </View>
+              </ScrollView>
                 
-              </TouchableOpacity>
+              
             )}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.courseListContainer}
@@ -130,7 +152,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#121212',
+    backgroundColor: 'black',
     position: 'relative', // This makes the absolute positioning work inside this container
   },
   searchContainer: {
@@ -183,17 +205,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   courseListContainer: {
-    marginTop: 20,
+    marginTop: 5,
     
   },
-  courseItem: {
-    backgroundColor: '#1e1e1e',
+  searchItem: {
+    borderRadius:10,
     padding: 5,
-    marginBottom: 12,
-    borderRadius: 8,
-    borderWidth:2,
-    borderColor:"gray",
-    overflow:"hidden"
+    marginBottom: 10,
+    borderWidth:1,
+    borderColor:"#333333",
+    overflow:"hidden",
+    height:60,
+    flexDirection:"row",
+    alignItems:"center",
+    justifyContent:"space-around"
+    
   },
   courseText: {
     color: '#fff',
@@ -201,7 +227,7 @@ const styles = StyleSheet.create({
   },
   absoluteCoursesList: {
     paddingHorizontal:15,
-    backgroundColor:"#121212",
+    backgroundColor:"black",
     position: 'absolute', // Positions the list over the background content
     top: 80, // Adjust top position to avoid overlap with search bar
     left: 0,
@@ -213,7 +239,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     marginTop: 20,
-    backgroundColor:"#121212",
+    backgroundColor:"black",
     height:60
   },
   bottomSheetContent: {

@@ -20,7 +20,7 @@ const RootLayout = () => {
       <StatusBar 
         hidden={false} 
         barStyle={theme === 'dark' ? 'light-content' : 'dark-content'} 
-        backgroundColor={theme === 'dark' ? '#000' : '#FFF'} />
+        backgroundColor={theme === 'dark' ? '#121212' : '#FFF'} />
     </>
   );
 };

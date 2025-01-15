@@ -25,7 +25,14 @@ const Home = () => {
   ];
 
   const onOpen = () => {
+
     modalizeRefFilter.current?.open();
+
+  };
+  const onCloseModal = (event: { persist: () => void; }) => {
+    event.persist(); // Persist the event to avoid the pooling warning if needed
+    modalizeRefFilter.current?.close();
+    console.log(event)
   };
   const data = [
     {
@@ -125,6 +132,13 @@ const Home = () => {
 
 
 
+    },
+    courseInfo: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      
+      height:50
     }
   });
 
@@ -267,22 +281,26 @@ const Home = () => {
           </View>
 
 
-          <Modalize ref={modalizeRefFilter} snapPoint={500} modalHeight={700} handlePosition="inside" handleStyle={{ backgroundColor: '#8c8c8c' }} modalStyle={{ backgroundColor: "#1c1d20" }}>
-            <View style={{ padding: 20 }}>
-              <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Modalize ref={modalizeRefFilter} snapPoint={500} modalHeight={700} handlePosition="inside" handleStyle={{ backgroundColor: '#8c8c8c' }} modalStyle={{ backgroundColor: "#1c1d20", paddingTop:5}}>
+            <View style={{ padding: 10,  }}>
+
+              <View style={styles.courseInfo}>
                 <Text></Text>
                 <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>Course info</Text>
-                <TouchableOpacity onPress={() => modalizeRefFilter.current?.close()}>
-                  <Image style={{ tintColor: 'white', width: 30, height: 30 }} source={require('@/assets/icons/cross-icon.png')} />
+                <TouchableOpacity onPress={onCloseModal}>
+                  <Image style={{ tintColor: 'white', width: 30, height: 30 ,padding:10, }} source={require('@/assets/icons/cross-icon.png')} />
                 </TouchableOpacity>
               </View>
+
               <FlatList
+
                 data={Enrollments.filter((enrollment) => enrollment.title === selectedCourse)}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                   <Enroll key={item.id} enrollment={item} /> // Pass the item directly
                 )}
               />
+             
             </View>
           </Modalize>
         </View>
