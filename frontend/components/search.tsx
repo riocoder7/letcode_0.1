@@ -56,13 +56,13 @@ const styles = StyleSheet.create({
         height:200,
         backgroundColor:"pink",
         borderRadius:8,
-        marginTop:5
+        marginTop:25
         
     },
     rightside:{
         width:"45%",
         height:200,
-        marginTop:30,
+        marginTop:25,
         backgroundColor:"pink",
         borderRadius:8,
        

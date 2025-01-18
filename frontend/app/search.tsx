@@ -36,7 +36,8 @@ const SearchPage = () => {
   { name: "Kubernetes", logo: require('@/assets/icons/kubernetes.png') },
   { name: "MongoDB", logo: require('@/assets/icons/mongodb.png') },
   { name: "MySQL", logo: require('@/assets/icons/mysql.png') },
-  { name: "Firebase", logo: require('@/assets/icons/firebase.png') }
+  { name: "Firebase", logo: require('@/assets/icons/firebase.png') },
+  { name: "sarfaraz", logo: require('@/assets/icons/firebase.png') }
   ];
 
   // Filter courses based on the search input
@@ -92,7 +93,7 @@ const SearchPage = () => {
             data={filteredCourses}
             keyExtractor={(item) => item!.name}
             renderItem={({ item }) => (
-              <ScrollView>
+             
                <View style={styles.searchItem}>
                 <View style={{width: 50, height: 50, borderRadius: 25, overflow: 'hidden'}}>
                   <Image source={item.logo} style={{width: '100%', height: '100%'}} resizeMode="cover" />
@@ -101,12 +102,12 @@ const SearchPage = () => {
                 <Text style={{fontSize:18, color:"#fff"}} >{item.name}</Text>
                 <Text style={{fontSize:12, color:"#666666"}} >{item.name} krfjkfjfkj kjdkjdj k kkjsksj </Text>
                  </View>
-                <View style={{flexDirection:"row", justifyContent:"center",alignItems:"center", }}> 
-                <Text style={{fontSize:35, color:"#fff"}}> > </Text>
-                </View>
+                <TouchableOpacity onPress={()=>Alert.alert("navgate")} style={{flexDirection:"row", justifyContent:"center",alignItems:"center", }}> 
+                <Image  source={require('@/assets/icons/right-arrow1.png')} style={{width: 24, height: 24, }} />
+                </TouchableOpacity>
                
               </View>
-              </ScrollView>
+              
                 
               
             )}

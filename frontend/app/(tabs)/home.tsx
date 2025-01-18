@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, useColorScheme, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
+import  Router  from 'expo-router';
 import Data from '@/components/data.json';
 import Popular_course from '@/components/popular_course';
 import Courses from '@/components/course';
