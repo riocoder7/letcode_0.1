@@ -1,87 +1,120 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Image, StyleSheet, StatusBar } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, Button, FlatList, StyleSheet, Alert } from 'react-native';
+import { socket } from '@/services/socket';
 
-const ChatApp = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const user = {
-    name: "John Doe",
-    dp: "https://example.com/user-dp.jpg",  // Replace with your image URL
+const App = () => {
+  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState<{ username: string; message: string }[]>([]);
+  const [username, setUsername] = useState('');
+  const [isUsernameSet, setIsUsernameSet] = useState(false);
+  
+
+  useEffect(() => {
+    // Listen for incoming messages
+    socket.on('receive_message', (data) => {
+      setMessages((prevMessages) => [...prevMessages, data]);
+    });
+
+    return () => {
+      socket.off('receive_message');
+    };
+  }, []);
+
+  const handleSetUsername = () => {
+    if (username.trim().length >= 4) {
+      setIsUsernameSet(true); // Proceed to the chat interface
+    } else {
+      Alert.alert('Invalid Username', 'Username must be at least 4 characters long.');
+    }
   };
 
-  const handleSearchChange = (text: React.SetStateAction<string>) => {
-    setSearchQuery(text);
+  const sendMessage = () => {
+    if (message.trim()) {
+      const data = { username, message };
+      socket.emit('send_message', data); // Emit the message to the server
+      setMessage(''); // Clear the input field after sending
+    }
+  };
+
+  const renderMessage = ({ item }) => {
+    const isSender = item.username === username; // Check if the message is from the current user
+
+    return (
+      <View
+        style={[
+          styles.messageContainer,
+          isSender ? styles.senderMessage : styles.receiverMessage,
+        ]}
+      >
+        {!isSender && <Text style={styles.username}>{item.username}:</Text>}
+        <Text style={styles.messageText}>{item.message}</Text>
+      </View>
+    );
   };
 
   return (
     <View style={styles.container}>
-      {/* Status bar for a cleaner UI */}
-      <StatusBar barStyle="dark-content" />
-
-      <View style={styles.header}>
-        <View style={styles.userInfo}>
-          {/* User Profile Picture */}
-          <Image source={{ uri: user.dp }} style={styles.userDp} />
-          
-          {/* User Name */}
-          <View style={styles.userNameContainer}>
-            <Text style={styles.userName}>{user.name}</Text>
-          </View>
+      {!isUsernameSet ? (
+        <View style={styles.usernameContainer}>
+          <Text style={styles.label}>Enter Your Username (at least 4 characters):</Text>
+          <TextInput
+            style={styles.input}
+            value={username}
+            onChangeText={setUsername}
+            placeholder="Username"
+          />
+          <Button title="Set Username" onPress={handleSetUsername} />
         </View>
+      ) : (
+        <>
+          <FlatList
+            data={messages}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={renderMessage}
+            style={styles.chatList}
+          />
 
-        {/* Search Bar */}
-        <TextInput
-          style={styles.searchInput}
-          placeholder="Search chats..."
-          value={searchQuery}
-          onChangeText={handleSearchChange}
-        />
-      </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              value={message}
+              onChangeText={setMessage}
+              placeholder="Type a message..."
+            />
+            <Button title="Send" onPress={sendMessage} />
+          </View>
+        </>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  container: { flex: 1, padding: 10, backgroundColor: '#f5f5f5' },
+  usernameContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  label: { fontSize: 18, marginBottom: 10 },
+  input: { borderWidth: 1, borderColor: '#ccc', padding: 10, borderRadius: 5, width: '80%', marginBottom: 10 },
+  inputContainer: { flexDirection: 'row', alignItems: 'center', marginVertical: 10 },
+  chatList: { flex: 1, marginBottom: 10 },
+  messageContainer: {
+    maxWidth: '70%',
     padding: 10,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-    padding: 10,
+    marginVertical: 5,
     borderRadius: 10,
   },
-  userInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  senderMessage: {
+    alignSelf: 'flex-end',
+    backgroundColor: '#0078FF',
+    borderTopRightRadius: 0,
   },
-  userDp: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,  // Circular DP
-    marginRight: 10,
+  receiverMessage: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#00ccff', // Light aqua-like background
+    borderTopLeftRadius: 0,
   },
-  userNameContainer: {
-    justifyContent: 'center',
-  },
-  userName: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-  },
-  searchInput: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 20,
-    paddingHorizontal: 10,
-    width: 200,
-    fontSize: 14,
-    backgroundColor: '#fff',
-  },
+  messageText: { color: '#004D40', fontSize: 16 }, // Dark teal text color for better readability
+  username: { fontWeight: 'bold', marginBottom: 5, color: '#00796B' }, // Slightly darker color for the username
 });
 
-export default ChatApp;
+
+export default App;

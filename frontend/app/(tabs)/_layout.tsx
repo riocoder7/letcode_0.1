@@ -50,12 +50,22 @@ export default function TabLayout() {
           ),
         }}
       />
+      
       <Tabs.Screen
         name="ai"
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <FontAwesome name="question-circle" size={size} color={color} />
+          ),
+        }}
+      />
+         <Tabs.Screen
+        name="chat"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="chat" size={size} color={color} />
           ),
         }}
       />

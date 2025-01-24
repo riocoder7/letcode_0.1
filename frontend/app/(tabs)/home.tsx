@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, useColorScheme, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import  Router  from 'expo-router';
 import Data from '@/components/data.json';
 import Popular_course from '@/components/popular_course';
 import Courses from '@/components/course';
@@ -10,14 +9,19 @@ import { Modalize } from 'react-native-modalize';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Enroll from '@/components/enroll';
 import Enrollments from '@/components/enrollments.json'
+import { Link, useRouter } from 'expo-router';
 const Home = () => {
+  const router = useRouter();
+  
   const modalizeRefFilter = useRef<Modalize>(null);
   const theme = useColorScheme();
   const isDarkMode = theme === 'dark';
   const [selected, setSelected] = useState('all');
   const [selectedCourse, setSelectedCourse] = useState<string>();
 
-  const enr = [
+ 
+
+  const enr = [                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
     // Assuming Enrollments data structure looks like this
     { id: 1, title: 'Web Development', student: 'John Doe' },
     { id: 2, title: 'App Development', student: 'Jane Smith' },
@@ -183,7 +187,7 @@ const Home = () => {
         {/* main View  */}
         <View style={{ flex: 1, }}>
           <View style={styles.header}>
-            <TouchableOpacity onPress={() => router.push('/(tabs)/profile')}>
+            <TouchableOpacity onPress={() => router.push('/profile')}>
               <View style={styles.profileSection}>
                 <Image
                   source={{
@@ -201,14 +205,14 @@ const Home = () => {
             <View style={styles.iconSection}>
               {/* Notification Icon */}
               <TouchableOpacity style={styles.iconContainer}
-              // onPress={() => router.push('/Notification')}
+              onPress={() => router.push("/OtherPage/Notification")}
               >
                 <Image style={{ tintColor: 'white', width: 20, height: 20 }} source={require('@/assets/icons/notification.png')} />
                 <View style={styles.notificationBadge} />
               </TouchableOpacity>
 
               {/* Search Icon */}
-              <TouchableOpacity style={styles.iconContainer} onPress={() => router.push('/search')}>
+              <TouchableOpacity style={styles.iconContainer} onPress={() => router.push('/OtherPage/search')}>
                 <Image style={{ tintColor: 'white', width: 20, height: 20 }} source={require('@/assets/icons/search.png')} />
               </TouchableOpacity>
             </View>

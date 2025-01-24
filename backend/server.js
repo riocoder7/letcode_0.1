@@ -24,7 +24,7 @@ app.post('/code_editor', (req, res) => {
   // Example: Process the code (you can integrate a code execution service)
   const output = `Code executed in ${language} with code: ${code}`;
   console.log(output);
-  
+  res.json({ output });
 });
 
 

@@ -13,7 +13,8 @@ const RootLayout = () => {
         <Stack.Screen name='getStart' options={{ headerShown: false }} />
         <Stack.Screen name='(auth)' options={{ headerShown: false }} />
         <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-       s
+     
+       
       
       </Stack>
     
