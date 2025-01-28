@@ -9,8 +9,8 @@ const AiExample = () => {
   const [theme, setTheme] = useState(Appearance.getColorScheme());  // Use system default theme
 
   // Initialize API
-  // const api_key = "AIzaSyCzmD-A9D3f0Mv0XokW8nP0ui7L0rPxG3A"; // Make sure to use your API key
-  const api_key = "AIzaSyDm7a1Vw4-Gp8h2GMsjHlFg438PDc2x574"; // Make sure to use your API key
+  
+  const api_key = " enter your api key "; // Make sure to use your API key
   const genAI = new GoogleGenerativeAI(api_key);
   const model = genAI.getGenerativeModel({
     model: "gemini-2.0-flash-exp",  

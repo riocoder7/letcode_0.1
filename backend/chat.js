@@ -27,4 +27,5 @@ io.on('connection', (socket) => {
 });
 
 const PORT = 3000;
-server.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+const HOST = 'enter your ip address here';
+server.listen(PORT, HOST, () => console.log(`Server running on http://${HOST}:${PORT}`));
