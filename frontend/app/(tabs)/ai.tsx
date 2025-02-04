@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import { View, Text, Button, TextInput, StyleSheet, ScrollView, ActivityIndicator, Appearance } from 'react-native';
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { gamini_ai_response } from '@/components/gamini_Ai';
 
 const AiExample = () => {
   const [inputText, setInputText] = useState('');
@@ -8,38 +8,10 @@ const AiExample = () => {
   const [loading, setLoading] = useState(false);
   const [theme, setTheme] = useState(Appearance.getColorScheme());  // Use system default theme
 
-  // Initialize API
-  
-  const api_key = " enter your api key "; // Make sure to use your API key
-  const genAI = new GoogleGenerativeAI(api_key);
-  const model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash-exp",  
-  });
-  const generationConfig = {
-    temperature: 1,
-    topP: 0.95,
-    topK: 40,
-    maxOutputTokens: 8192,
-    responseMimeType: "text/plain",
-  };
 
-  // Function to run the AI and generate content
-  async function run() {
-    setLoading(true);
-    const chatSession = model.startChat({
-      generationConfig,
-      history: [],
-    });
+  const ai_result = ()=>( gamini_ai_response(inputText , setGeneratedText as Dispatch<SetStateAction<any>> , setLoading as Dispatch<SetStateAction<any>>))
 
-    try {
-      const result = await chatSession.sendMessage(inputText);
-      setGeneratedText(result.response.text());
-    } catch (error) {
-      console.error("Error generating content:", error);
-    } finally {
-      setLoading(false);
-    }
-  }
+    
 
   // Function to toggle themes (light/dark)
   const toggleTheme = () => {
@@ -58,7 +30,7 @@ const AiExample = () => {
           value={inputText}
           onChangeText={setInputText}
         />
-        <Button title="Generate Content" onPress={run} />
+        <Button title="Generate Content" onPress={ai_result} />
         <Button title="Toggle Theme" onPress={toggleTheme} />
         
         {/* Display loading indicator while waiting for the response */}

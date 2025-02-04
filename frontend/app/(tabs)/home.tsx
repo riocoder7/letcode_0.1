@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, useColorScheme, FlatLi
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Data from '@/components/data.json';
 import Popular_course from '@/components/popular_course';
-import Courses from '@/components/course';
+import Regular_course from '@/components/regular_course';
 import { Dispatch, SetStateAction } from 'react';
 import { Modalize } from 'react-native-modalize';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -40,7 +40,7 @@ const Home = () => {
   };
   const data = [
     {
-      type: 'popular',  // Section for popular courses slider
+      type: 'popular',  // Section for popular Regular_course slider
       data: Data.filter((item) => selected === 'all' || item.category === selected),
     },
     {
@@ -146,41 +146,6 @@ const Home = () => {
     }
   });
 
-
-  // Render function for popular courses
-  // const renderPopularCourse = ({ item }: { item: any }) => (
-  //   <TouchableOpacity onPress={() => {}}>
-  //     <Popular_course key={item.id} data={[item]} />
-  //   </TouchableOpacity>
-  // );
-
-  // Render function for regular courses
-  // const renderRegularCourse = ({ item }) => <Courses key={item.id} data={[item]} />;
-
-  // Render each item based on its type (popular or regular)
-  // const renderItem = ({ item }) => {
-  //     if (item.type === 'popular') {
-  //       return (
-  //         <FlatList
-  //           horizontal
-  //           showsHorizontalScrollIndicator={false}
-  //           data={item.data}
-  //           keyExtractor={(course) => course.id.toString()}
-  //           renderItem={renderPopularCourse}
-  //         />
-  //       );
-  //     } else if (item.type === 'regular') {
-  //       return (
-  //         <FlatList
-  //           data={item.data}
-  //           keyExtractor={(course) => course.id.toString()}
-  //           renderItem={renderRegularCourse}
-  //         />
-  //       );
-  //     }
-  //     return null; // Ensure a valid React element is always returned
-  //   };
-
   return (
     <GestureHandlerRootView>
       <SafeAreaView style={{ backgroundColor: '#000000', flex: 1 }}>
@@ -243,7 +208,7 @@ const Home = () => {
 
           </View>
 
-          {/* Combined FlatList for both Popular Courses and Regular Courses */}
+          {/* Combined FlatList for both Popular Regular_course and Regular Regular_course */}
           <View style={{ width: '100%', flex: 1, paddingHorizontal: 10 }}>
             <FlatList
               data={data}
@@ -273,7 +238,7 @@ const Home = () => {
                       keyExtractor={(course) => course.id.toString()}
                       renderItem={({ item }) => (
 
-                        <Courses key={item.id} data={[item]} modulizer={onOpen} setCourse={setSelectedCourse as Dispatch<SetStateAction<any>>} />
+                        <Regular_course key={item.id} data={[item]} modulizer={onOpen} setCourse={setSelectedCourse as Dispatch<SetStateAction<any>>} />
 
                       )}
                     />

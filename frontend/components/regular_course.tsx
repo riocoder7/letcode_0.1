@@ -12,7 +12,7 @@ interface Course {
 
 }
 
-const Courses  = ({ data, modulizer, setCourse }: { data: Course[], modulizer: () => void, setCourse: React.Dispatch<React.SetStateAction<string>> }) => {
+const Regular_course  = ({ data, modulizer, setCourse }: { data: Course[], modulizer: () => void, setCourse: React.Dispatch<React.SetStateAction<string>> }) => {
   // const [fomedata, setfomedata]= useState({});
   // const onHandleInputData=(field: string, value: string) => {
   //   setfomedata((prev) => ({
@@ -90,7 +90,7 @@ const Courses  = ({ data, modulizer, setCourse }: { data: Course[], modulizer: (
   )
 }
 
-export default Courses
+export default Regular_course
 
 const styles = StyleSheet.create({
     course:{

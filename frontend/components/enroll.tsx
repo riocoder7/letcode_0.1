@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { Alert, Share, TouchableOpacity } from 'react-native';
 import { View, Text, Button, StyleSheet, Image } from 'react-native';
@@ -13,6 +14,7 @@ interface Course {
 
 // CourseCard component that accepts `enrollment` prop
 const Enroll = ({ enrollment, }: { enrollment: Course, }) => {
+    const router = useRouter();
     const shareContent = async () => {
         try {
           const result = await Share.share({
@@ -90,8 +92,8 @@ const Enroll = ({ enrollment, }: { enrollment: Course, }) => {
               </Text>
             </View>
 
-            <TouchableOpacity style={{width:'100%', height:50, backgroundColor:"#007bff", marginTop:20, borderRadius:12, justifyContent:"center"}}>
-                <Text onPress={()=>Alert.alert("enrollments successfull ")} style={{ textAlign: 'center', fontSize:20,fontWeight: 'bold',  color:"#fff" }}>Enroll Now</Text>
+            <TouchableOpacity onPress={() => router.push('/home')} style={{width:'100%', height:50, backgroundColor:"#007bff", marginTop:20, borderRadius:12, justifyContent:"center"}}>
+                <Text  style={{ textAlign: 'center', fontSize:20,fontWeight: 'bold',  color:"#fff" }}>Enroll Now</Text>
             </TouchableOpacity>
 
         </View>
