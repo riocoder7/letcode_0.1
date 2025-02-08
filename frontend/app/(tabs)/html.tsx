@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import { 
-  View, Text, FlatList, TouchableOpacity, ScrollView, TextInput, Animated, TouchableWithoutFeedback, StyleSheet 
+import {
+  View, Text, FlatList, TouchableOpacity, ScrollView, TextInput, Animated, TouchableWithoutFeedback, StyleSheet,
+  Image
 } from "react-native";
 import { WebView } from "react-native-webview";
 import course_data from "@/components/course_data.json";
+import { hide } from "expo-router/build/utils/splash";
+import CodeResult from "@/components/code_result";
 
 const CourseScreen = () => {
   const [selectedLesson, setSelectedLesson] = useState(course_data[0].lessons[0]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [code, setCode] = useState(selectedLesson.example);
   const slideAnim = useState(new Animated.Value(-300))[0]; // Sidebar hidden initially
-
+  const [showOutPut, setshowOutPut] = useState(false)
   // Toggle Sidebar Animation
   const toggleMenu = () => {
     Animated.timing(slideAnim, {
@@ -32,14 +35,32 @@ const CourseScreen = () => {
   };
 
   // Change lesson and update the editor
-  const changeLesson = (lesson: { id: number; title: string; content: string; example: string; subTopics?: { title: string; content: string; }[] }) => {
+  const changeLesson = (lesson: {
+    id: number;
+    title: string;
+    content: string;
+    example: string;
+    subTopics: {
+      title: string;
+      content: string;
+      code_output?: {
+        code: string[],
+        result:  string[],
+        fileName: string,
+        language: string,
+        
+        size?: number
+      }[];
+
+    }[]
+  }) => {
     setSelectedLesson(lesson);
     setCode(lesson.example);
     closeMenu();
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#0D121C", paddingBottom:10}}>
+    <View style={{ flex: 1, backgroundColor: "#0D121C", paddingBottom: 10 }}>
       {/* ☰ Menu Button */}
       <TouchableOpacity onPress={toggleMenu} style={styles.menuButton}>
         <Text style={styles.menuText}>☰ Menu</Text>
@@ -48,6 +69,7 @@ const CourseScreen = () => {
       {/* Sidebar Overlay */}
       {isMenuOpen && (
         <TouchableWithoutFeedback onPress={closeMenu}>
+
           <View style={styles.overlay} />
         </TouchableWithoutFeedback>
       )}
@@ -69,31 +91,44 @@ const CourseScreen = () => {
 
       {/* Main Content */}
       <ScrollView style={styles.content}>
-       
 
-        
+
+
         <Text style={styles.title}>{selectedLesson.title}</Text>
-       <View style={styles.subTopicItem}>
-        <Text style={styles.description}>{selectedLesson.content}</Text>
-          </View> 
+        <View style={styles.subTopicItem}>
+          <Text style={styles.description}>{selectedLesson.content}</Text>
+        </View>
+
+
+
         {/* Sub-Topics Section */}
         {selectedLesson.subTopics && selectedLesson.subTopics.length > 0 && (
+
           <View style={styles.subTopicContainer}>
             {/* <Text style={styles.subTopicTitle}>Sub-Topics:</Text> */}
             {selectedLesson.subTopics.map((sub, index) => (
-            <View>
+             
+              <View key={index}>
                 <Text style={styles.subTopicHeader}>{sub.title}</Text>
-                <View key={index} style={styles.subTopicItem}>
-                <Text style={styles.subTopicContent}>{sub.content}</Text>
-              </View>
-              </View>
+                <View style={styles.subTopicItem}>
+                  <Text style={styles.subTopicContent}>{sub.content}</Text>
+                </View>
+
+                 {/* code and result section  */}
+              {sub.code_output && <CodeResult output={sub.code_output} index={index} />}
+
+            </View>
             ))}
+
           </View>
         )}
 
+       
+
+
         {/* Code Editor */}
         <Text style={styles.sectionTitle}>Try It Yourself:</Text>
-        
+
         <TextInput
           style={styles.codeEditor}
           multiline
@@ -104,15 +139,17 @@ const CourseScreen = () => {
 
         {/* Buttons */}
         <View style={styles.buttonRow}>
-        <TouchableOpacity onPress={() => { /* Add your run code logic here */ }} style={styles.runButton}>
+          <TouchableOpacity onPress={() => { /* Add your run code logic here */ }} style={styles.runButton}>
             <Text style={styles.buttonText}>Run Code</Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={resetCode} style={styles.resetButton}>
             <Text style={styles.buttonText}>Reset Code</Text>
           </TouchableOpacity>
-         
+
         </View>
+
+
 
         {/* Live Preview */}
         <WebView source={{ html: code }} style={styles.webView} />
@@ -120,15 +157,15 @@ const CourseScreen = () => {
         {/* Navigation Buttons */}
         <View style={styles.navigation}>
           {selectedLesson.id > 1 && (
-            <TouchableOpacity 
-              onPress={() => changeLesson(course_data[0].lessons[selectedLesson.id - 2])} 
+            <TouchableOpacity
+              onPress={() => changeLesson(course_data[0].lessons[selectedLesson.id - 2])}
               style={[styles.navButton, styles.previousButton]}>
               <Text style={styles.buttonText}>⬅️ Previous</Text>
             </TouchableOpacity>
           )}
           {selectedLesson.id < course_data[0].lessons.length && (
-            <TouchableOpacity 
-              onPress={() => changeLesson(course_data[0].lessons[selectedLesson.id])} 
+            <TouchableOpacity
+              onPress={() => changeLesson(course_data[0].lessons[selectedLesson.id])}
               style={[styles.navButton, styles.nextButton]}>
               <Text style={styles.buttonText}>Next ➡️</Text>
             </TouchableOpacity>
@@ -139,7 +176,7 @@ const CourseScreen = () => {
   );
 };
 
-const styles = StyleSheet.create ({
+const styles = StyleSheet.create({
   menuButton: {
     padding: 15,
     backgroundColor: "#007BFF"
@@ -182,20 +219,23 @@ const styles = StyleSheet.create ({
     padding: 15
   },
   title: {
-    fontSize: 22,
+    fontFamily: "monospace",
+    fontSize: 30,
     fontWeight: "bold",
     marginBottom: 10,
-    color: "#99CC7D"
+    color: "#007BFF",
+
   },
   description: {
+    fontFamily: "monospace",
     marginBottom: 15,
     fontSize: 16,
     lineHeight: 22,
     color: "#fff"
   },
   subTopicContainer: {
-    marginBottom: 15, 
-    marginTop:15,
+    marginBottom: 15,
+    marginTop: 15,
   },
   subTopicTitle: {
     fontSize: 18,
@@ -210,14 +250,16 @@ const styles = StyleSheet.create ({
     borderColor: "#007BFF"
   },
   subTopicHeader: {
-    marginBottom:20,
+    fontFamily: "monospace",
+    marginBottom: 20,
     fontWeight: "bold",
     fontSize: 20,
     color: "#99CC7D"
   },
   subTopicContent: {
+    fontFamily: "monospace",
     fontSize: 15,
-    lineHeight:20,
+    lineHeight: 25,
     color: "#fff"
   },
   sectionTitle: {
@@ -226,22 +268,23 @@ const styles = StyleSheet.create ({
     color: "#fff"
   },
   codeEditor: {
+    fontFamily: "monospace",
     minHeight: 350,
     borderWidth: 1,
-    borderRadius:8,
+    borderRadius: 8,
     borderColor: "#aaa",
     padding: 10,
     fontSize: 16,
     marginVertical: 10,
     color: "#fff",
     backgroundColor: "#2D2D3A",
-    maxHeight:450,
-    borderLeftColor:"#007BFF"
+    maxHeight: 450,
+    borderLeftColor: "#007BFF"
   },
   buttonRow: {
     flexDirection: "row",
     marginBottom: 10,
-    justifyContent:"space-between"
+    justifyContent: "space-between"
   },
   resetButton: {
     padding: 10,
@@ -250,7 +293,7 @@ const styles = StyleSheet.create ({
   },
   buttonText: {
     color: "#fff",
-    
+
   },
   runButton: {
     padding: 10,
@@ -267,7 +310,7 @@ const styles = StyleSheet.create ({
   navigation: {
     flexDirection: "row",
     marginTop: 20,
-    marginBottom:30
+    marginBottom: 30
   },
   navButton: {
     padding: 10,

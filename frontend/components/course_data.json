@@ -1,35 +1,171 @@
 [{
-    "id": 1,
-    "title": "HTML",
-    "lessons": [
-      { 
-        "id": 1,
-       "title": "Introduction to HTML", 
-       "content": "HTML stands for Hyper Text Markup Language.\n\nIt is the standard markup language for creating web pages. HTML describes the structure of a webpage using elements.\n\nThese elements tell the browser how to display the content.\n\nExample: A heading and a paragraph:\n\n<h1>This is a heading</h1>\n<p>This is a paragraph.</p>",
-       "subTopics": [
-        { "title": "What is HTML?", "content": "HTML (**HyperText Markup Language**) is the standard language for creating web pages. It structures content using elements like headings, paragraphs, images, and links. HTML works with CSS for styling and JavaScript for interactivity.." },
-        { "title": "Why use HTML?", "content": "** Defines Structure ** –> Organizes content with headings, paragraphs, lists, etc.\n\nWorks with CSS & JavaScript –> CSS styles the page, and JavaScript adds interactivity.\n\nSEO-Friendly –> Helps search engines understand content. \n\nUniversal & Easy  –>  Supported by all browsers and easy to learn. \n\nMultimedia Support –> Allows images, videos, and audio integration." },
-        { "title": "Basic HTML Syntax", "content": "HTML uses tags like <html>, <body>, <h1>." }
-      ],
-       "example": "<!DOCTYPE html> \n\n <html> \n\n <head> \n\n <title>Page Title</title>\n\n </head>\n\n <body>\n\n   <h1>Hello, World!</h1>   \n\n </body> \n\n</html>" 
-      },
-      { 
-        "id": 2, 
-        "title": "HTML Elements", 
-        "content": "HTML elements are the building blocks of HTML.", 
-        "example": "<p>This is a paragraph.</p>" 
-      },
-      { 
-        "id": 3, 
-        "title": "HTML Attributes", 
-        "content": "HTML attributes provide additional information about HTML elements.", 
-        "example": "<a href='https://www.example.com'>This is a link</a>" 
-      },
-      { 
-        "id": 4, 
-        "title": "HTML Headings", 
-        "content": "HTML headings are defined with the <h1> to <h6> tags.", 
-        "example": "<h2>This is a heading</h2>" 
+  "id": 1,
+  "title": "HTML",
+  "lessons": [
+    { 
+      "id": 1,
+      "title": "Introduction to HTML", 
+      "content": "HTML stands for Hyper Text Markup Language.\n\nIt is the standard markup language for creating web pages. HTML describes the structure of a webpage using elements.\n\nThese elements tell the browser how to display the content.\n\nExample: A heading and a paragraph:\n\n<h1>This is a heading</h1>\n<p>This is a paragraph.</p>",
+      "subTopics": [
+        { "title": "What is HTML?", "content": "HTML (HyperText Markup Language) is the standard language for creating web pages. It structures content using elements like headings, paragraphs, images, and links. HTML works with CSS for styling and JavaScript for interactivity.." },
+        { "title": "Why use HTML?", "content": "Defines Structure ➡️ Organizes content with headings, paragraphs, lists, etc.\n\nWorks with CSS & JavaScript ➡️ CSS styles the page, and JavaScript adds interactivity.\n\nSEO-Friendly ➡️ Helps search engines understand content. \n\nUniversal & Easy ➡️ Supported by all browsers and easy to learn. \n\nMultimedia Support ➡️ Allows images, videos, and audio integration." },
+        { "title": "Basic HTML Syntax", "content": "HTML uses tags like <html>, <body>, <h1>.",
+        "code_output":[
+        {
+          "code":[
+            "<html>",
+            "<head>",
+            "<title>This is the Title of the Page</title>",
+            "</head>",
+            "<body>",
+            "<h1>Hello, World!</h1>",
+            "</body>",
+            "</html>"
+          ] , 
+        "result": [
+          "Hello, World!"
+          ],
+          "fileName":"first.html" ,
+          "language":"HTML"
+        }
+      ]
       }
-    ]
+        
+      ],
+      
+      "example": "<!DOCTYPE html> \n\n <html> \n\n <head> \n\n <title>Page Title</title>\n\n </head>\n\n <body>\n\n   <h1>Hello, World!</h1>   \n\n </body> \n\n</html>" 
+    },
+    { 
+      "id": 2, 
+      "title": "TEXT", 
+      "content": "When creating a web page, you add tags (known as markup) to the contents of the page. These tags provide extra meaning and allow browsers to show users the appropriate structure for the page, \n\nIn this chapter we focus on how to add markup to the text that appears on your pages. You will learn about: \n\n● Structural markup: the elements that you can use to describe both headings and paragraphs \n\n● Semantic markup: which provides extra information; such as where emphasis is placed in a sentence, that something you have written is a quotation (and who said it), the meaning of acronyms, and so on",
+      "subTopics": [
+      { "title": "Headings", "content": "<h1> <h2> <h3> <h4> <h5> <h6>\nHTML has six 'levels' of headings\n\n<h1> is used for main headings <h2> is used for subheadings\n\nIf there are further sections under the subheadings then the <h3> element is used, and so on... \n\nBrowsers display the contents of headings at different sizes. The contents of an <h1> element is the largest, and the contents of an <h6> element is the smallest. The exact size at which each browser shows the headings can vary slightly. Users can also adjust the size of text in their browser. You will see how to control the size of text, its color, and the fonts used when we come to look at CSS. " ,
+      "code_output":[
+        {
+          "code":[
+            "<h1>This is a Main Heading</h1>",
+            "<h2>This is a Level 2 Heading</h2>",
+            "<h3>This is a Level 3 Heading</h3>",
+            "<h4>This is a Level 4 Heading</h4>",
+            "<h5>This is a Level 5 Heading</h5>",
+            "<h6>This is a Level 6 Heading</h6>"
+          ] , 
+        "result":[
+            "This is a Main Heading",
+            "This is a Level 2 Heading",
+            "This is a Level 3 Heading",
+            "This is a Level 4 Heading",
+            "This is a Level 5 Heading",
+            "This is a Level 6 Heading"
+            ],"fileName":"heading.html" ,"language":"HTML", "size":23},
+            {
+            "code":[
+            "<h1>This is a Main Heading</h1>",
+            "<h2>This is a Level 2 Heading</h2>",
+            "<h3>This is a Level 3 Heading</h3>",
+            "<h4>This is a Level 4 Heading</h4>",
+            "<h5>This is a Level 5 Heading</h5>",
+            "<h6>This is a Level 6 Heading</h6>"
+            ] , 
+          "result":[
+            "This is a sahi Heading",
+            "This is a Level 2 Heading",
+            "This is a Level 3 Heading",
+            "This is a Level 4 Heading",
+            "This is a Level 5 Heading",
+            "This is a Level 6 Heading"
+            ],"fileName":"heading.html" ,"language":"HTML", "size":23}
+          
+          
+      ]
+      },
+      { "title": "Paragraphs", "content": "To create a paragraph, surround the words that make up the paragraph with an opening <p> tag and closing </p> tag. By default, a browser will show each paragraph on a new line with some space between it and any subsequent paragraphs. ",
+      "code_output":[
+        {"code":[
+          "<p>This is a paragraph.</p>"
+          ] , 
+        "result":["This is a paragraph."],"fileName":"paragraph.html" ,"language":"HTML"}
+        ]
+    },
+      { "title": "Bold & Italic", "content": "By enclosing words in the tags <b> and </b> we can make characters appear bold. The <b> element also represents a section of text that would be presented in a visually different way (for example key words in a paragraph) \n\nBy enclosing words in the tags <i> and </i> we can make characters appear italic. The <i> element also represents a section of text that would be said in a different way from surrounding content (such as technical terms, names of ships, foreign words, thoughts, or other terms that would usually be italicized). ",
+      "code_output":[
+        {"code":[
+          "<p>This is <b>bold</b> text.</p>",
+          "<p>This is <i>italic</i> text.</p>"
+          ] , 
+        "result":["This is bold text.","This is italic text."],"fileName":"bold_italic.html" ,"language":"HTML"}
+        ]
+     
+    }
+     
+      ],
+     
+      "example": "<p>This is a paragraph.</p>" 
+    },
+    { 
+      "id": 3, 
+      "title": "HTML Attributes", 
+      "content": "HTML attributes provide additional information about HTML elements.", 
+      "subTopics": [
+      { "title": "Common Attributes", "content": "Common attributes include id, class, style, and title." },
+      { "title": "Attribute Syntax", "content": "Attributes are added to the opening tag of an element and are written as name-value pairs." },
+      { "title": "Global Attributes", "content": "Global attributes can be used on any HTML element, such as lang, dir, and hidden." }
+      ],
+      "example": "<a href='https://www.example.com'>This is a link</a>" 
+    },
+    { 
+      "id": 4, 
+      "title": "HTML Headings", 
+      "content": "HTML headings are defined with the <h1> to <h6> tags.", 
+      "subTopics": [
+      { "title": "Heading Levels", "content": "There are six levels of headings, from <h1> to <h6>, with <h1> being the highest level.",
+      "code_output":[
+        {"code":[
+          "<html>\n",
+          "<head> \n ",
+          " <title>This is the Title of the Page</title>\n",
+          " </head>\n",
+          " <body>  \n",
+          " <h1>Hello, World!</h1> \n",
+          " </body>\n",
+          "</html>"
+          ] ,
+         "result": ["Hello, World!"],"fileName":"first.html" ,"language":"HTML"}
+        ]
+       },
+      { "title": "Using Headings", "content": "Headings are used to create a hierarchical structure for your content." },
+      { "title": "Semantic Importance", "content": "Headings provide semantic meaning to the content, helping search engines and screen readers understand the structure of the page." }
+      ],
+     
+      "example": "<h2>This is a heading</h2>" 
+    },
+    { 
+      "id": 5, 
+      "title": "HTML Lists", 
+      "content": "HTML lists allow web developers to group a set of related items in lists.", 
+      "subTopics": [
+      { "title": "Unordered Lists", "content": "Unordered lists are created with the <ul> tag and list items are added with the <li> tag.",
+      "code_output":[
+        {"code":[
+          "<html>",
+          "<head>",
+          "<title>This is the Title of the Page</title>",
+          "</head>",
+          "<body>",
+          "<h1>Hello, World!</h1>",
+          "</body>",
+          "</html>"
+          ] ,
+         "result": ["Hello, World!"],"fileName":"first.html" ,"language":"HTML"}
+        ]
+       },
+      { "title": "Ordered Lists", "content": "Ordered lists are created with the <ol> tag and list items are added with the <li> tag." },
+      { "title": "Description Lists", "content": "Description lists are created with the <dl> tag and terms are defined with the <dt> and <dd> tags." }
+      ],
+      
+      
+      "example": "<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n  <li>Item 3</li>\n</ul>" 
+    }
+  ]
 }]
