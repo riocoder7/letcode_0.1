@@ -227,21 +227,15 @@
                "h1 {",
                 "  color: blue;",
                 "  font-size: 12px;",
-                "}"
-
+                "}",
+                
+                "p {",
+                  "  color: red;",
+                  "  font-size: 14px;",
+                  "}"
               ],
               
               "fileName":"first.css" ,
-              "language":"CSS"
-            },
-            {
-              "code":[
-                "p {",
-                "  color: red;",
-                "  font-size: 14px;",
-                "}"
-              ],
-              "fileName":"second.css" ,
               "language":"CSS"
             }
           ]

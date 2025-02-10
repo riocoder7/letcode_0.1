@@ -24,7 +24,7 @@ const CodeResult = ({ index, output }: {
         <View style={{ width: '97%', minHeight: 250, maxHeight: 400, borderRadius: 12, backgroundColor: '#1B2B34', paddingTop: 35, paddingBottom: 10, paddingLeft: 10, marginBottom: 10, position: "relative", zIndex: 0 }}>
          
           <SyntaxHighlighter
-            language={output[1]?.language}
+            language={output[0]?.language}
             style={monokai}
             wrapLongLines={false} 
            
@@ -36,7 +36,7 @@ const CodeResult = ({ index, output }: {
             }}
             
           >
-            {output[1]?.code.join('\n')}
+            {output[0]?.code.join('\n')}
           </SyntaxHighlighter>
 
         </View>
