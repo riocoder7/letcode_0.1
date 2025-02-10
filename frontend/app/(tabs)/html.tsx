@@ -9,7 +9,7 @@ import { hide } from "expo-router/build/utils/splash";
 import CodeResult from "@/components/code_result";
 
 const CourseScreen = () => {
-  const [selectedLesson, setSelectedLesson] = useState(course_data[0].lessons[0]);
+  const [selectedLesson, setSelectedLesson] = useState(course_data[1].lessons[0]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [code, setCode] = useState(selectedLesson.example);
   const slideAnim = useState(new Animated.Value(-300))[0]; // Sidebar hidden initially
@@ -45,7 +45,6 @@ const CourseScreen = () => {
       content: string;
       code_output?: {
         code: string[],
-        result:  string[],
         fileName: string,
         language: string,
         
@@ -77,7 +76,7 @@ const CourseScreen = () => {
       {/* Sidebar (Animated) */}
       <Animated.View style={[styles.sidebar, { left: slideAnim }]}>
         <FlatList
-          data={course_data[0].lessons}
+          data={course_data[1].lessons}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity onPress={() => changeLesson(item)} style={[
@@ -158,14 +157,14 @@ const CourseScreen = () => {
         <View style={styles.navigation}>
           {selectedLesson.id > 1 && (
             <TouchableOpacity
-              onPress={() => changeLesson(course_data[0].lessons[selectedLesson.id - 2])}
+              onPress={() => changeLesson(course_data[1].lessons[selectedLesson.id - 2])}
               style={[styles.navButton, styles.previousButton]}>
               <Text style={styles.buttonText}>⬅️ Previous</Text>
             </TouchableOpacity>
           )}
-          {selectedLesson.id < course_data[0].lessons.length && (
+          {selectedLesson.id < course_data[1].lessons.length && (
             <TouchableOpacity
-              onPress={() => changeLesson(course_data[0].lessons[selectedLesson.id])}
+              onPress={() => changeLesson(course_data[1].lessons[selectedLesson.id])}
               style={[styles.navButton, styles.nextButton]}>
               <Text style={styles.buttonText}>Next ➡️</Text>
             </TouchableOpacity>
