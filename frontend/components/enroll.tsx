@@ -32,6 +32,7 @@ const Enroll = ({ enrollment, }: { enrollment: Course, }) => {
           console.error('Error sharing content', error);
         }
       };
+      const title = enrollment.title;
       
     return (
         
@@ -92,7 +93,7 @@ const Enroll = ({ enrollment, }: { enrollment: Course, }) => {
               </Text>
             </View>
 
-            <TouchableOpacity onPress={() => router.push('/home')} style={{width:'100%', height:50, backgroundColor:"#007bff", marginTop:20, borderRadius:12, justifyContent:"center"}}>
+            <TouchableOpacity onPress={() => router.push(`/(courses)/html?title=${encodeURIComponent(title)}`)} style={{width:'100%', height:50, backgroundColor:"#007bff", marginTop:20, borderRadius:12, justifyContent:"center"}}>
                 <Text  style={{ textAlign: 'center', fontSize:20,fontWeight: 'bold',  color:"#fff" }}>Enroll Now</Text>
             </TouchableOpacity>
 

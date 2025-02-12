@@ -1,6 +1,6 @@
   [{
   "id": 1,
-  "title": "HTML",
+  "title": "Web Development",
   "lessons": [
     { 
       "id": 1,
@@ -264,7 +264,63 @@
         }
       ]
   
-      }
-      
+      },
 
+      {
+        "id": 4,
+        "title": "App Development",
+        "lessons": [
+          { 
+            "id": 1,
+            "title": "App Development", 
+            "content": "React is a JavaScript library for building user interfaces.\n\nReact is used to build single-page applications.\n\nReact allows developers to create reusable UI components.\n\nReact uses a virtual DOM to improve performance.",
+            "subTopics": [
+              { "title": "What is React?", "content": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used to create single-page applications, mobile applications, and large-scale web applications." },
+              { "title": "Why use React?", "content": "Component-Based ➡️ Breaks UI into reusable components.\n\nVirtual DOM ➡️ Updates only changed parts of the page.\n\nPerformance ➡️ Faster rendering with virtual DOM.\n\nOne-Way Data Binding ➡️ Updates UI automatically when data changes.\n\nJSX Syntax ➡️ Combines HTML and JavaScript for easier coding." },
+              { "title": "React Syntax", "content": "React components are written in JSX, a syntax extension for JavaScript. Components are created using classes or functions." },
+              { "title": "What is React?", "content": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used to create single-page applications, mobile applications, and large-scale web applications." },
+              { "title": "Why use React?", "content": "Component-Based ➡️ Breaks UI into reusable components.\n\nVirtual DOM ➡️ Updates only changed parts of the page.\n\nPerformance ➡️ Faster rendering with virtual DOM.\n\nOne-Way Data Binding ➡️ Updates UI automatically when data changes.\n\nJSX Syntax ➡️ Combines HTML and JavaScript for easier coding." },
+              { "title": "React Syntax", "content": "React components are written in JSX, a syntax extension for JavaScript. Components are created using classes or functions." },
+              { "title": "What is React?", "content": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used to create single-page applications, mobile applications, and large-scale web applications." },
+              { "title": "Why use React?", "content": "Component-Based ➡️ Breaks UI into reusable components.\n\nVirtual DOM ➡️ Updates only changed parts of the page.\n\nPerformance ➡️ Faster rendering with virtual DOM.\n\nOne-Way Data Binding ➡️ Updates UI automatically when data changes.\n\nJSX Syntax ➡️ Combines HTML and JavaScript for easier coding." },
+              { "title": "React Syntax", "content": "React components are written in JSX, a syntax extension for JavaScript. Components are created using classes or functions." }
+            ],
+            "example": "class Welcome extends React.Component {\n  render() {\n    return <h1>Hello, World!</h1>;\n  }\n}" 
+          },
+          { 
+            "id": 1,
+            "title": "App Development with react ", 
+            "content": "React is a JavaScript library for building user interfaces.\n\nReact is used to build single-page applications.\n\nReact allows developers to create reusable UI components.\n\nReact uses a virtual DOM to improve performance.",
+            "subTopics": [
+              { "title": "What is React?", "content": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used to create single-page applications, mobile applications, and large-scale web applications." },
+              { "title": "Why use React?", "content": "Component-Based ➡️ Breaks UI into reusable components.\n\nVirtual DOM ➡️ Updates only changed parts of the page.\n\nPerformance ➡️ Faster rendering with virtual DOM.\n\nOne-Way Data Binding ➡️ Updates UI automatically when data changes.\n\nJSX Syntax ➡️ Combines HTML and JavaScript for easier coding." },
+              { "title": "React Syntax", "content": "React components are written in JSX, a syntax extension for JavaScript. Components are created using classes or functions." },
+              { "title": "What is React?", "content": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used to create single-page applications, mobile applications, and large-scale web applications." },
+              { "title": "Why use React?", "content": "Component-Based ➡️ Breaks UI into reusable components.\n\nVirtual DOM ➡️ Updates only changed parts of the page.\n\nPerformance ➡️ Faster rendering with virtual DOM.\n\nOne-Way Data Binding ➡️ Updates UI automatically when data changes.\n\nJSX Syntax ➡️ Combines HTML and JavaScript for easier coding." },
+              { "title": "React Syntax", "content": "React components are written in JSX, a syntax extension for JavaScript. Components are created using classes or functions." },
+              { "title": "What is React?", "content": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used to create single-page applications, mobile applications, and large-scale web applications." },
+              { "title": "Why use React?", "content": "Component-Based ➡️ Breaks UI into reusable components.\n\nVirtual DOM ➡️ Updates only changed parts of the page.\n\nPerformance ➡️ Faster rendering with virtual DOM.\n\nOne-Way Data Binding ➡️ Updates UI automatically when data changes.\n\nJSX Syntax ➡️ Combines HTML and JavaScript for easier coding." },
+              { "title": "React Syntax", "content": "React components are written in JSX, a syntax extension for JavaScript. Components are created using classes or functions." }
+            ],
+            "example": "class Welcome extends React.Component {\n  render() {\n    return <h1>Hello, World!</h1>;\n  }\n}" 
+          },
+          { 
+            "id": 1,
+            "title": "App Development with flutter ", 
+            "content": "React is a JavaScript library for building user interfaces.\n\nReact is used to build single-page applications.\n\nReact allows developers to create reusable UI components.\n\nReact uses a virtual DOM to improve performance.",
+            "subTopics": [
+              { "title": "What is React?", "content": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used to create single-page applications, mobile applications, and large-scale web applications." },
+              { "title": "Why use React?", "content": "Component-Based ➡️ Breaks UI into reusable components.\n\nVirtual DOM ➡️ Updates only changed parts of the page.\n\nPerformance ➡️ Faster rendering with virtual DOM.\n\nOne-Way Data Binding ➡️ Updates UI automatically when data changes.\n\nJSX Syntax ➡️ Combines HTML and JavaScript for easier coding." },
+              { "title": "React Syntax", "content": "React components are written in JSX, a syntax extension for JavaScript. Components are created using classes or functions." },
+              { "title": "What is React?", "content": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used to create single-page applications, mobile applications, and large-scale web applications." },
+              { "title": "Why use React?", "content": "Component-Based ➡️ Breaks UI into reusable components.\n\nVirtual DOM ➡️ Updates only changed parts of the page.\n\nPerformance ➡️ Faster rendering with virtual DOM.\n\nOne-Way Data Binding ➡️ Updates UI automatically when data changes.\n\nJSX Syntax ➡️ Combines HTML and JavaScript for easier coding." },
+              { "title": "React Syntax", "content": "React components are written in JSX, a syntax extension for JavaScript. Components are created using classes or functions." },
+              { "title": "What is React?", "content": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used to create single-page applications, mobile applications, and large-scale web applications." },
+              { "title": "Why use React?", "content": "Component-Based ➡️ Breaks UI into reusable components.\n\nVirtual DOM ➡️ Updates only changed parts of the page.\n\nPerformance ➡️ Faster rendering with virtual DOM.\n\nOne-Way Data Binding ➡️ Updates UI automatically when data changes.\n\nJSX Syntax ➡️ Combines HTML and JavaScript for easier coding." },
+              { "title": "React Syntax", "content": "React components are written in JSX, a syntax extension for JavaScript. Components are created using classes or functions." }
+            ],
+            "example": "class Welcome extends React.Component {\n  render() {\n    return <h1>Hello, World!</h1>;\n  }\n}" 
+          }
+        ]
+      }
 ]

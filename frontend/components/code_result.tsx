@@ -52,7 +52,11 @@ const CodeResult = ({ index, output }: {
 
         <View style={{ width: '97%', height: 250, backgroundColor: '#22272E', paddingTop: 35, overflow: 'hidden', borderRadius: 12, paddingLeft: 5, marginBottom: 10, position: "relative", zIndex: 0 }}>
 
-          <WebView source={{ html: output[0]?.code.join('\n') }} style={{ fontSize: 30, backgroundColor: "#22272E" }} injectedJavaScript={`
+          <WebView 
+          source={{ html: output[0]?.code.join('\n') }} 
+          style={{ fontSize: 30, backgroundColor: "#22272E" }}
+         injectedJavaScript={`
+          
         document.body.style.color = "white";
         document.body.style.fontSize = "28px";
         

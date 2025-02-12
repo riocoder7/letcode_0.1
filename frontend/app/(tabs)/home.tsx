@@ -9,9 +9,10 @@ import { Modalize } from 'react-native-modalize';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Enroll from '@/components/enroll';
 import Enrollments from '@/components/enrollments.json'
-import { Link, useRouter } from 'expo-router';
+import { Link, useRouter} from 'expo-router';
 const Home = () => {
   const router = useRouter();
+
   
   const modalizeRefFilter = useRef<Modalize>(null);
   const theme = useColorScheme();
